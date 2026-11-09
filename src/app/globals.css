@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+/* Tema escuro controlado por data-theme no <html> (aplicado antes da pintura por um script inline). */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/*
+ * Sob Medida — tokens de design
+ * Giz (canvas) + azul-petróleo (ações) + amarelo de fita métrica (medições).
+ * O amarelo é reservado à fita métrica de compatibilidade e aos realces de palavras-chave.
+ */
+:root {
+  color-scheme: light;
+  --canvas: #f3f4f1;
+  --surface: #ffffff;
+  --surface-2: #f8f9f7;
+  --surface-3: #eef0ec;
+  --line: #e2e5e0;
+  --line-strong: #cdd2cc;
+  --ink: #16181d;
+  --ink-2: #4b5058;
+  --ink-3: #6b717b;
+
+  --primary: #0f5e66;
+  --primary-hover: #0b4a51;
+  --primary-soft: #e3f0f0;
+  --primary-ink: #0b4a51;
+  --on-primary: #ffffff;
+
+  --tape: #f2c230;
+  --tape-edge: #d9a912;
+  --tape-ink: #241d08;
+  --tape-soft: #fff4cc;
+  --tape-soft-ink: #6b4f00;
+
+  --success: #2e7d4f;
+  --success-soft: #e5f2ea;
+  --warning: #9a5b06;
+  --warning-soft: #fbf0dd;
+  --danger: #b42318;
+  --danger-soft: #fbe9e7;
+
+  --status-analisada: #7b828c;
+  --status-curriculo_preparado: #0f5e66;
+  --status-candidatado: #2f5e9e;
+  --status-em_andamento: #7b5ea7;
+  --status-entrevista: #b7791f;
+  --status-reprovado: #b42318;
+  --status-aprovado: #2e7d4f;
+
+  /* Séries dos gráficos (validadas com o validador de paleta: CVD ΔE 14,6; contraste ≥ 3:1) */
+  --series-1: #00939c;
+  --series-2: #e0782a;
+
+  --shadow-raised: 0 1px 2px rgb(22 24 29 / 0.05), 0 4px 16px -6px rgb(22 24 29 / 0.08);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --canvas: #0f1213;
+  --surface: #161a1c;
+  --surface-2: #1b2023;
+  --surface-3: #222829;
+  --line: #2a3033;
+  --line-strong: #3a4246;
+  --ink: #e8ebea;
+  --ink-2: #b3babe;
+  --ink-3: #8d959b;
+
+  --primary: #55b6bd;
+  --primary-hover: #74c6cc;
+  --primary-soft: #15333a;
+  --primary-ink: #93d5da;
+  --on-primary: #08191b;
+
+  --tape: #e3b83c;
+  --tape-edge: #b8901f;
+  --tape-ink: #1a1508;
+  --tape-soft: #3a2f0c;
+  --tape-soft-ink: #f1d77d;
+
+  --success: #62c08a;
+  --success-soft: #16301f;
+  --warning: #e4a64e;
+  --warning-soft: #33260e;
+  --danger: #f2826f;
+  --danger-soft: #3a1915;
+
+  --status-analisada: #8d959b;
+  --status-curriculo_preparado: #55b6bd;
+  --status-candidatado: #6e9ce0;
+  --status-em_andamento: #a98fd6;
+  --status-entrevista: #e4a64e;
+  --status-reprovado: #f2826f;
+  --status-aprovado: #62c08a;
+
+  /* Mesmos matizes, passos próprios para a superfície escura (CVD ΔE 15,4) */
+  --series-1: #1e9da6;
+  --series-2: #d9762e;
+
+  --shadow-raised: 0 1px 2px rgb(0 0 0 / 0.4), 0 6px 20px -8px rgb(0 0 0 / 0.5);
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-primary: var(--primary);
+  --color-primary-hover: var(--primary-hover);
+  --color-primary-soft: var(--primary-soft);
+  --color-primary-ink: var(--primary-ink);
+  --color-on-primary: var(--on-primary);
+  --color-tape: var(--tape);
+  --color-tape-edge: var(--tape-edge);
+  --color-tape-ink: var(--tape-ink);
+  --color-tape-soft: var(--tape-soft);
+  --color-tape-soft-ink: var(--tape-soft-ink);
+  --color-success: var(--success);
+  --color-success-soft: var(--success-soft);
+  --color-warning: var(--warning);
+  --color-warning-soft: var(--warning-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-series-1: var(--series-1);
+  --color-series-2: var(--series-2);
+
+  --font-sans: var(--font-plex-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-plex-condensed), var(--font-plex-sans), ui-sans-serif, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  --shadow-raised: var(--shadow-raised);
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--canvas);
+    color: var(--ink);
+    font-feature-settings: "ss02";
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--tape-soft);
+    color: var(--ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+    border-radius: 6px;
+  }
+
+  input,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Marca de giz: borda tracejada usada para o que ainda não está no currículo. */
+  .chalk-border {
+    border: 1px dashed var(--line-strong);
+  }
+
+  /* "Costura" animada: linha tracejada em movimento para etapas da IA em andamento. */
+  .stitch-running {
+    background-image: repeating-linear-gradient(90deg, var(--primary) 0 6px, transparent 6px 11px);
+    background-size: 22px 2px;
+    background-repeat: repeat-x;
+    animation: stitch 0.9s linear infinite;
+  }
+
+  @keyframes stitch {
+    to {
+      background-position: 22px 0;
+    }
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
