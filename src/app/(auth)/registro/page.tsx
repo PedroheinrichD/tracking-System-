@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { connection } from "next/server";
 import { Suspense } from "react";
 import { AuthForm } from "@/components/auth/auth-form";
 import { ButtonLink } from "@/components/ui/button";
@@ -9,6 +10,8 @@ import { isRegistrationOpen } from "@/server/repositories/users";
 export const metadata: Metadata = { title: "Criar conta" };
 
 async function Registration() {
+  // Consulta o banco: precisa rodar no momento da requisição, não na pré-renderização.
+  await connection();
   if (!(await isRegistrationOpen())) {
     return (
       <div className="space-y-4">
